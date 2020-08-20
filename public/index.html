@@ -19,34 +19,16 @@
         <button id="button" type="submit">Enviar</button>
     </form>
     <script type="text/javascript">
+        console.log(this);
         var socket = io('http://localhost:3333');
-        socket.emit('connected');
-        socket.on('firstConnection', data => {
-            data.forEach(value => {
-                renderMessage(value);
-            })
-        })
-        function renderMessage(message) {
-            $('.messages')
-                .append('<div class="message"><strong>' + message.author + '</strong>:' + message.message + '</div>');
-        }
+        socket.on('refresh', data => {
 
-        socket.on('receivedMessage', data => {
-            renderMessage(data);
+            location.reload(true);
+            socket.emit('refreshed');
         })
-        $('#chat').submit((event) => {
-
-            event.preventDefault();
-            var author = $('input[name=username]').val();
-            var message = $('input[name=message]').val();
-            if (author.length && message.length) {
-                const messageObj = {
-                    author,
-                    message,
-                }
-                renderMessage(messageObj);
-                socket.emit('sendMessage', messageObj);
-            }
+        $('#button').click(() => {
+            socket.emit('refreshed')
+            consoole.log('aadas');
         })
     </script>
 </body>
