@@ -1,5 +1,5 @@
 {
-  "name": "fastRefresh",
+  "name": "fast_refresh",
   "version": "1.0.0",
   "description": "fast refresh",
   "main": "server.js",
