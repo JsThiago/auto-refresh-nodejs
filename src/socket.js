@@ -8,15 +8,10 @@ fs.watch(path.join(__dirname, '..', 'public'), (eventType, filename) => {
 
 function socket(server) {
 
-
-
     const io = require('socket.io')(server);
 
     io.on('connection', socket => {
         socketRef = socket
-        socket.on('refreshed', (data) => {
-            console.log('refresh complete');
-        });
     })
     return socketRef;
 }

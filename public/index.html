@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat simples</title>
+    <title>fast refresh test</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <link rel="stylesheet" href="styles.css">
@@ -18,19 +18,7 @@
         <input type="text" name="message" placeholder="Digite sua mensagem">
         <button id="button" type="submit">Enviar</button>
     </form>
-    <script type="text/javascript">
-        console.log(this);
-        var socket = io('http://localhost:3333');
-        socket.on('refresh', data => {
 
-            location.reload(true);
-            socket.emit('refreshed');
-        })
-        $('#button').click(() => {
-            socket.emit('refreshed')
-            consoole.log('aadas');
-        })
-    </script>
 </body>
 
 </html>
