@@ -12,12 +12,176 @@
 </head>
 
 <body>
-    <form id="chat">
-        <input type="text" name="username" placeholder="Digite o usuário">
-        <div class="messages"></div>
-        <input type="text" name="message" placeholder="Digite sua mensagem">
-        <button id="button" type="submit">Enviar</button>
-    </form>
+
+    <div class="modal">
+        <div class="modalContent">
+            <span id="close" class="close">&times;</span>
+            <div class="inputs">
+                <p id="inputNameLabel" class="inputText">Nome:</p>
+                <input id="inputName" class="inputModal" type="text">
+            </div>
+            <div class="inputs">
+                <p class="inputText">Professor:</p>
+                <input id="inputProfessor" class="inputModal" type="text">
+            </div>
+            <div class="inputs">
+                <p class="inputText">Data limite:</p>
+                <input id="inputData" class="inputModal" type="text">
+            </div>
+            <div class="inputs">
+                <p class="inputText">Descrição:</p>
+                <textarea class="inputModalTextarea" rows="10"></textarea>
+            </div>
+            <button class="modalButton">Cadastrar</button>
+        </div>
+    </div>
+    <div id="container">
+        <div class="backgroundColorTop">
+        </div>
+
+
+        <div id="ic" class="activityType">
+            <h1>I.C</h1>
+            <div class="messages">
+
+
+            </div>
+            <button class="addButtons" id="button1">Adicionar</button>
+        </div>
+        <div id="extensao" class="activityType">
+            <h1>Extensão</h1>
+            <div class="messages">
+
+
+            </div>
+            <button class="addButtons" id="button2">Adicionar</button>
+        </div>
+        <div id="outros" class="activityType">
+            <h1>Outros</h1>
+            <div class="messages">
+
+
+            </div>
+            <button class="addButtons" id="button3">Adicionar</button>
+        </div>
+        <div class="backgroundColorButton">
+        </div>
+        <script>
+            //Functions
+            function cleanInputs() {
+                var inputs = document.querySelectorAll('.inputModal');
+                var inputsTextArea = document.querySelector('.inputModalTextarea');
+                inputsTextArea.value = '';
+                console.log(inputs);
+                inputs.forEach((input) => {
+                    input.value = '';
+                })
+            }
+            //variables
+            var cardCount = 0;
+            var card = document.getElementsByClassName('card')[0]
+            var addButtons = document.querySelectorAll('.addButtons');
+            var modalButton = document.getElementsByClassName('modalButton')[0];
+            var functionRemoveEventListener;
+            var modal = document.getElementsByClassName('modal')[0];
+            //handlers
+            var cardHandlerEnter = (card) => {
+                card.insertAdjacentHTML('beforeend', `
+                <div id="remove">
+                    <button id="delete">deletar</button>
+                </div>`);
+                document.getElementById('delete').addEventListener('click', (e) => {
+                    card.remove();
+                });
+            };
+            var cardHandlerLeave = (card) => {
+                document.getElementById('remove').remove();
+            };
+            var closeHandler = (buttonModal) => {
+                cleanInputs();
+                modalButton.removeEventListener('click', functionRemoveEventListener);
+                modal.style.display = 'none';
+            }
+            var addHandler = function (button) {
+                functionRemoveEventListener = modalButtonAddEventListener(button);
+                modal.style.display = 'block';
+
+            };
+            var modalHandler = function (button) {
+                var inputs = document.getElementsByClassName('inputModal');
+                var inputsTextArea = document.querySelector('.inputModalTextarea');
+                var teste = button.parentElement.childNodes[3].insertAdjacentHTML('beforeend',
+                    `
+                <div class="card" id="card${cardCount}">
+                    <p class="cardText">Nome:${inputs[0].value}</p>
+                    <p class="cardText">Professor:${inputs[1].value}</p>
+                    <p class="cardText">Data limite:${inputs[2].value}</p>
+                    <p class="cardText">Descrição:${inputsTextArea.value}</p>
+                </div>
+                
+
+                `
+
+                );
+                cardAddEventlistenerMouseEnter(document.getElementById(`card${cardCount}`));
+                cardAddEventlistenerMouseLeave(document.getElementById(`card${cardCount}`));
+                cardCount++;
+                modalButton.removeEventListener('click', functionRemoveEventListener);
+                modal.style.display = "none";
+                cleanInputs();
+
+
+            };
+            //eventListener
+            var cardAddEventlistenerMouseLeave = (card) => {
+                var handlerFunction = () => { cardHandlerLeave(card) };
+                card.addEventListener('mouseleave', handlerFunction);
+                return handlerFunction;
+            }
+            var cardAddEventlistenerMouseEnter = (card) => {
+                var handlerFunction = () => { cardHandlerEnter(card) };
+                card.addEventListener('mouseenter', handlerFunction);
+                return handlerFunction;
+            }
+            var modalButtonAddEventListener = (button) => {
+                var handlerFunction = () => { modalHandler(button) };
+                console.log(button.parentElement);
+                modalButton.addEventListener('click', handlerFunction);
+                return handlerFunction;
+            }
+            var closeAddEventListener = (modalButton) => {
+                var handlerFunction = () => { closeHandler(modalButton) };
+                var close = document.getElementById('close');
+                close.addEventListener('click', handlerFunction);
+                return handlerFunction;
+            }
+            var addButtonAddEventListener = (button) => {
+                handlerFunction = (e) => { addHandler(button) }
+                button.addEventListener('click', handlerFunction);
+                return handlerFunction;
+            }
+
+            //-----------------------------------------
+
+
+            window.onclick = (event) => {
+                // modal é a parte cinza. Ou seja quando o modal esta aberto ele é toda a área menos a área branca.
+                if (event.target === modal) {
+                    cleanInputs();
+                    modalButton.removeEventListener('click', functionRemoveEventListener);
+                    modal.style.display = "none";
+
+                }
+            }
+
+            closeAddEventListener(modalButton);
+            addButtons.forEach((button) => {
+                addButtonAddEventListener(button);
+                console.log(button.parentElement);
+
+
+            })
+        </script>
 
 </body>
 

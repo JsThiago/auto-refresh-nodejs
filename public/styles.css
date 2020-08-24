@@ -1,31 +1,165 @@
 html, body {
     height: 100%;
+    
+  }
+  .backgroundColorTop{
+    background-image: linear-gradient(180deg, #f0f8ff, white);
+    z-index: -1;
+    position:fixed;
+    width: 100%;
+    height: 50%;
+   
+  }
+  .backgroundColorButton{
+    
+    background-image: linear-gradient(180deg, white,white,#e0eefa);
+    z-index: -2;
+    position:fixed;
+    width: 100%;
+    height: 100%;
+
+  }
+  #inputName{
+    align-self: center;
+    justify-content:center;
+    align-content: center;
+    margin-top: 5%;
+    margin-left: 4%;
+  
+  }
+  #inputProfessor{
+    
+    margin-left: 1%;
   }
   
+  #delete{
+   
+    width:auto;
+    height: auto;
+    float:right;
+    margin-right: 10%;
+    
+  }
+  
+  .cardText{
+    margin-bottom: 5%;
+    word-wrap: break-word;
+    max-width: 100%;
+    margin-left: 5%;
+  }
+  .card{
+    flex-direction: column;
+    
+    display:flex;
+    background-color: aliceblue;
+    width:100%;
+    height: auto;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: thin;
+    margin-bottom: 5px;
+  }
   * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+   
   }
-  
-  #chat {
+  .modal{
+    display:none;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1;
+    padding-top: 100px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    
+ 
+  }
+  .inputModal{
+
+    align-self: center;
+    justify-content:center;
+    align-content: center;
+
+  }
+
+
+  .modalContent{
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    height: 70%;
+    margin:auto;
+    background-color:white;
+    width: 50%;
+    padding: 20px;
+    
+  }
+  #inputNameLabel{
+    margin-top: 5%;
+  }
+
+  #container {
+    flex-wrap: wrap;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+    
   }
-  
-  input {
-    width: 600px;
+  .modalButton{
+    align-self: flex-start;
+    width:100px;
+  }
+  .inputs{
+    width:100%;
+    align-self:"center";
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+
+  }
+  .inputText{
+    align-self: center;
+    justify-content:center;
+    align-content: center;
+
+    max-width: 10%;
+    margin-right:10px
+  }
+  .close{
+    margin-top: -3%;
+    color:#aaaaaa;
+    font-size: 28px;
+    font-weight: 28px;
+    float: right;
+    
+  }
+  .close:hover{
+    color:#000;
+    cursor:pointer;
+  }
+  .inputModal {
+    width: 80%;
     border: 1px solid #ddd;
     height: 50px;
     padding: 0 20px;
     font-size: 14px;
   }
+  .inputModalTextarea{
+    padding: 0 20px;
+    font-size: 14px;
+    height: 200px;
+    border: 1px solid #ddd;
+    width:100%;
+  }
   
   button {
-    width: 600px;
+    width: 445px;
     height: 50px;
     font-size: 14px;
     background: #069;
@@ -35,11 +169,42 @@ html, body {
     color: #FFF;
     margin-top: 10px;
   }
+  .activityType{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+  }
   
   .messages {
-    width: 600px;
+    flex-direction: column;
+    display: flex;
+    width: 400px;
     height: 400px;
-    margin: 20px 0;
     border: 1px solid #ddd;
     padding: 20px;
+    overflow-y:scroll;
+    overflow-x:visible;
+  }
+  @media  (max-width : 500px){
+    .messages{
+      width: 300px;
+      margin-top:20px
+    }
+    button{
+      width:300px;
+      display:none;
+    }
+  }
+  @media  (max-width : 890px){
+    .messages{
+      margin-top:20px
+    }
+  }
+  @media  (max-width : 1334px){
+    h1{
+      font-size: 30px;
+      margin-top:10px;
+    }
   }
